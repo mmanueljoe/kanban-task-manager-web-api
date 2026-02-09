@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
+import { AnimatedOutlet } from './AnimatedOutlet';
 import { Header } from '@components/layout/Header';
 import { Aside } from '@components/layout/Aside';
 import { AddTaskModal } from '@components/modals/AddTaskModal';
@@ -49,7 +50,7 @@ export function Layout() {
           canEditBoard={currentBoard != null}
         />
         <main className="app-layout-main">
-          <Outlet />
+          <AnimatedOutlet />
         </main>
       </div>
       <AddBoardModal

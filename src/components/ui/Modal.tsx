@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { useTheme } from '@hooks/useTheme';
 
 type ModalProps = {
   open: boolean;
@@ -14,6 +15,7 @@ export function Modal({
   children,
   'aria-label': ariaLabel = 'Dialog',
 }: ModalProps) {
+  const { theme } = useTheme();
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,6 +47,7 @@ export function Modal({
       role="dialog"
       aria-modal="true"
       aria-label={ariaLabel}
+      data-theme={theme}
       onClick={onClose}
     >
       <div

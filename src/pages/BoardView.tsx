@@ -3,7 +3,7 @@ import { useBoards } from '@/hooks/useBoards';
 import { useCurrentBoard } from '@/hooks/useCurrentBoard';
 import { Button } from '@components/ui/Button';
 import type { Task } from '@/types/types';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, memo } from 'react';
 import { TaskDetailsModal } from '@components/modals/TaskDetailsModal';
 import { AddColumnModal } from '@components/modals/AddColumnModal';
 import {
@@ -56,7 +56,7 @@ function decodeColumnId(
 }
 
 /** UPDATED: Draggable task card. Id encodes boardIndex, column, taskTitle so we can dispatch MOVE_TASK on drop. */
-function DraggableTask({
+const DraggableTask = memo(function DraggableTask({
   boardIndex,
   columnName,
   task,
@@ -98,7 +98,7 @@ function DraggableTask({
       <p className="app-board-task-subtasks">{subtaskSummary(task)}</p>
     </li>
   );
-}
+});
 
 /** UPDATED: Droppable column. Id encodes boardIndex and columnName so we know where the task was dropped. */
 function DroppableColumn({
@@ -230,14 +230,19 @@ export function BoardView() {
 
   if (!board) {
     return (
-      <div className="app-main app-main-board">
-        <h1 className="heading-xl app-section-title">Board not found</h1>
-        <p className="body-l">This board does not exist or was removed.</p>
-        <Link to="/">
-          <Button variant="primary" size="large">
-            Return to Dashboard
-          </Button>
-        </Link>
+      <div className="app-main app-main-board app-board-not-found">
+        <div className="app-board-not-found-content">
+          <div className="app-board-not-found-icon">📋</div>
+          <h1 className="app-board-not-found-title">Board not found</h1>
+          <p className="app-board-not-found-description">
+            This board does not exist or has been removed.
+          </p>
+          <Link to="/">
+            <Button variant="primary" size="large">
+              Return to Dashboard
+            </Button>
+          </Link>
+        </div>
       </div>
     );
   }

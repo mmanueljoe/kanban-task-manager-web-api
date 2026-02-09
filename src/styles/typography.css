@@ -30,6 +30,7 @@
     font-size: 12px;
     line-height: 15px;
     letter-spacing: 2.4px;
+    color: var(--text-primary);
   }
 
   .body-l {
@@ -37,6 +38,7 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 23px;
+    color: var(--text-primary);
   }
 
   .body-m {
@@ -44,5 +46,6 @@
     font-weight: 700;
     font-size: 12px;
     line-height: 19px;
+    color: var(--text-primary);
   }
 }

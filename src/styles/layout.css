@@ -376,4 +376,192 @@
       display: inline;
     }
   }
+
+  /* 404 Not Found Page */
+  .app-not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+    padding: 48px 16px;
+  }
+  @media (min-width: 768px) {
+    .app-not-found {
+      min-height: calc(100vh - 300px);
+      padding: 64px 32px;
+    }
+  }
+  .app-not-found-content {
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+  }
+  .app-not-found-number {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 120px;
+    line-height: 1;
+    color: var(--primary);
+    margin-bottom: 24px;
+    letter-spacing: -2px;
+    opacity: 0.9;
+  }
+  @media (min-width: 768px) {
+    .app-not-found-number {
+      font-size: 160px;
+      margin-bottom: 32px;
+    }
+  }
+  .app-not-found-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    color: var(--text-primary);
+    margin: 0 0 16px 0;
+  }
+  @media (min-width: 768px) {
+    .app-not-found-title {
+      font-size: 32px;
+      line-height: 40px;
+      margin-bottom: 20px;
+    }
+  }
+  .app-not-found-description {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 23px;
+    color: var(--text-muted);
+    margin: 0 0 32px 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: 768px) {
+    .app-not-found-description {
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 40px;
+    }
+  }
+  .app-not-found-content > a {
+    display: inline-block;
+  }
+
+  /* Admin Page Styles */
+  .app-admin-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .app-admin-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  @media (min-width: 768px) {
+    .app-admin-header {
+      margin-bottom: 64px;
+    }
+  }
+  .app-admin-icon {
+    font-size: 64px;
+    line-height: 1;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+  @media (min-width: 768px) {
+    .app-admin-icon {
+      font-size: 80px;
+      margin-bottom: 32px;
+    }
+  }
+  .app-admin-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+  }
+  @media (min-width: 768px) {
+    .app-admin-title {
+      font-size: 40px;
+      line-height: 48px;
+      margin-bottom: 16px;
+    }
+  }
+  .app-admin-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .app-admin-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .app-admin-info-card {
+    background-color: var(--bg-main);
+    border: 1px solid var(--lines);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+  }
+  @media (min-width: 768px) {
+    .app-admin-info-card {
+      padding: 32px;
+      gap: 24px;
+    }
+  }
+  .app-admin-info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  @media (min-width: 768px) {
+    .app-admin-info-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+  .app-admin-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 2.4px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .app-admin-value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: var(--text-primary);
+  }
+  @media (min-width: 768px) {
+    .app-admin-value {
+      font-size: 20px;
+      line-height: 25px;
+    }
+  }
+  .app-admin-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .app-admin-actions {
+      justify-content: flex-start;
+    }
+  }
 }

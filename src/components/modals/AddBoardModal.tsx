@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import { Modal } from '@components/ui/Modal';
 import { Button } from '@components/ui/Button';
@@ -22,74 +22,94 @@ export function AddBoardModal({ open, onClose }: AddBoardModalProps) {
   const [columns, setColumns] = useState<string[]>(['Todo', 'Doing']);
   const [errors, setErrors] = useState<{ name?: string; columns?: string }>({});
 
-  const addColumn = () => setColumns((c) => [...c, '']);
-  const removeColumn = (i: number) =>
+  const addColumn = useCallback(() => {
+    setColumns((c) => [...c, '']);
+  }, []);
+
+  const removeColumn = useCallback((i: number) => {
     setColumns((c) => c.filter((_, idx) => idx !== i));
-  const updateColumn = (i: number, v: string) =>
+  }, []);
+
+  const updateColumn = useCallback((i: number, v: string) => {
     setColumns((c) => {
       const next = [...c];
       next[i] = v;
       return next;
     });
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
 
-    const trimmedName = name.trim();
-    const cleanedColumns = columns
-      .map((c) => c.trim())
-      .filter((c) => c.length > 0);
+      const trimmedName = name.trim();
+      const cleanedColumns = columns
+        .map((c) => c.trim())
+        .filter((c) => c.length > 0);
 
-    const nextErrors: { name?: string; columns?: string } = {};
+      const nextErrors: { name?: string; columns?: string } = {};
 
-    if (!trimmedName) {
-      nextErrors.name = 'Board name is required.';
-      showToast({
-        type: 'error',
-        message: 'Please provide a name for the board.',
-      });
-    }
+      if (!trimmedName) {
+        nextErrors.name = 'Board name is required.';
+        showToast({
+          type: 'error',
+          message: 'Please provide a name for the board.',
+        });
+      }
 
-    if (cleanedColumns.length === 0) {
-      nextErrors.columns = 'Please add at least one column for the new board.';
-      showToast({
-        type: 'error',
-        message: 'Please add at least one column for the new board.',
-      });
-    }
+      if (cleanedColumns.length === 0) {
+        nextErrors.columns =
+          'Please add at least one column for the new board.';
+        showToast({
+          type: 'error',
+          message: 'Please add at least one column for the new board.',
+        });
+      }
 
-    if (nextErrors.name || nextErrors.columns) {
-      setErrors(nextErrors);
-      return;
-    }
+      if (nextErrors.name || nextErrors.columns) {
+        setErrors(nextErrors);
+        return;
+      }
 
-    setErrors({});
+      setErrors({});
 
-    const newBoardIndex = boards.length;
+      const newBoardIndex = boards.length;
 
-    const newBoard: Board = {
-      name: trimmedName,
-      columns: cleanedColumns.map((colName) => ({
-        name: colName,
-        tasks: [],
-      })),
-    };
+      const newBoard: Board = {
+        name: trimmedName,
+        columns: cleanedColumns.map((colName) => ({
+          name: colName,
+          tasks: [],
+        })),
+      };
 
-    startLoading('addBoard');
-    try {
-      dispatch({
-        type: 'ADD_BOARD',
-        payload: newBoard,
-      });
-      showToast({ type: 'success', message: 'Board created' });
-      void navigate(`/board/${newBoardIndex}`);
-    } finally {
-      stopLoading('addBoard');
-      onClose();
-      setName('');
-      setColumns(['Todo', 'Doing']);
-    }
-  };
+      startLoading('addBoard');
+      try {
+        dispatch({
+          type: 'ADD_BOARD',
+          payload: newBoard,
+        });
+        showToast({ type: 'success', message: 'Board created' });
+        void navigate(`/board/${newBoardIndex}`);
+      } finally {
+        stopLoading('addBoard');
+        onClose();
+        setName('');
+        setColumns(['Todo', 'Doing']);
+      }
+    },
+    [
+      boards,
+      dispatch,
+      navigate,
+      onClose,
+      showToast,
+      startLoading,
+      stopLoading,
+      name,
+      columns,
+    ]
+  );
 
   return (
     <Modal open={open} onClose={onClose} aria-label="Add board">

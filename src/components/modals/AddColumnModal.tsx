@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Modal } from '@components/ui/Modal';
 import { Button } from '@components/ui/Button';
 import { useBoards } from '@/hooks/useBoards';
@@ -19,32 +19,35 @@ export function AddColumnModal({
   const { startLoading, stopLoading, showToast } = useUi();
   const [name, setName] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (boardIndex === null || !name.trim()) {
-      showToast({
-        type: 'error',
-        message: 'Please provide a name for the new column.',
-      });
-      return;
-    }
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (boardIndex === null || !name.trim()) {
+        showToast({
+          type: 'error',
+          message: 'Please provide a name for the new column.',
+        });
+        return;
+      }
 
-    startLoading('addColumn');
-    try {
-      dispatch({
-        type: 'ADD_COLUMN',
-        payload: {
-          boardIndex,
-          columnName: name.trim(),
-        },
-      });
-      showToast({ type: 'success', message: 'Column added' });
-      setName('');
-    } finally {
-      stopLoading('addColumn');
-      onClose();
-    }
-  };
+      startLoading('addColumn');
+      try {
+        dispatch({
+          type: 'ADD_COLUMN',
+          payload: {
+            boardIndex,
+            columnName: name.trim(),
+          },
+        });
+        showToast({ type: 'success', message: 'Column added' });
+        setName('');
+      } finally {
+        stopLoading('addColumn');
+        onClose();
+      }
+    },
+    [boardIndex, name, dispatch, onClose, showToast, startLoading, stopLoading]
+  );
 
   return (
     <Modal open={open} onClose={onClose} aria-label="Add column">

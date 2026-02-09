@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Button } from '@components/ui/Button';
 import { Dropdown } from '@components/ui/Dropdown';
 import { Input } from '@components/ui/Input';
@@ -61,7 +61,7 @@ function validateTaskForm(
   return errors;
 }
 
-export function TaskForm({
+function TaskFormComponent({
   mode,
   initialValues,
   columns,
@@ -295,3 +295,5 @@ export function TaskForm({
     </form>
   );
 }
+
+export const TaskForm = memo(TaskFormComponent);
