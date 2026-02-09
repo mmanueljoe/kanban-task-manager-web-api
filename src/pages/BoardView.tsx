@@ -101,7 +101,7 @@ const DraggableTask = memo(function DraggableTask({
 });
 
 /** UPDATED: Droppable column. Id encodes boardIndex and columnName so we know where the task was dropped. */
-function DroppableColumn({
+const DroppableColumn = memo(function DroppableColumn({
   boardIndex,
   columnName,
   columnIndex,
@@ -140,7 +140,7 @@ function DroppableColumn({
       <ul className="app-board-tasks">{children}</ul>
     </section>
   );
-}
+});
 
 export function BoardView() {
   const [selectedTask, setSelectedTask] = useState<{
